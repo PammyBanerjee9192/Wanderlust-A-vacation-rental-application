@@ -1,0 +1,52 @@
+<% layout('/layouts/boilerplate.ejs') %>
+<body>
+     
+        <div class="row">
+            <div class="col-8 offset-2">
+                <br><br>
+                <h1>Edit your listing</h1>
+                <form method="post" action="/listings/update/<%= item._id%>?_method=PUT" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                         <label for="title" class="form-label">Edit title: </label><br>
+                         <input type="text" placeholder="enter a catchy title" name="title" id="title" value="<%= item.title%>" class="form-control" required>
+                          <div class="valid-feedback">Title looks good</div>
+                          <div class="invalid-feedback">Title should be valid</div>
+                </div>
+                    <div class="mb-3">
+                         <label for="description" class="form-label">Edit description: </label><br>
+                         <textarea name="description" id="description" class="form-control"  required><%= item.description%></textarea>
+                         <div class="valid-feedback">Description looks good</div>
+                         <div class="invalid-feedback">Please write a short description</div>
+                </div>
+                <div class="mb-3">
+                         <label for="Image" class="form-label">Edit Image Link: </label><br>
+                         <input type="text" placeholder="enter image URL/link" name="image" id="Image" value="<%= item.image%>" class="form-control"  required>
+                         <div class="invalid-feedback">Please enter a valid URL/Link</div>
+                 </div>
+                 <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="Price" class="form-label">Edit Price: </label><br>
+                        <input type="text" placeholder="12000" name="price" id="Price" value="<%= item.price%>" class="form-control"  required>
+                         <div class="valid-feedback">Price looks good</div>
+                         <div class="invalid-feedback">Price should be valid</div>
+                </div>
+                <div class="mb-3 col-md-8">
+                    <label for="Country" class="form-label">Edit Country: </label><br>
+                    <input type="text" placeholder="India" name="country" id="Country" value="<%= item.country %>" class="form-control"  required>
+                    <div class="valid-feedback">Country name looks good</div>
+                    <div class="invalid-feedback">Country name should be valid</div>
+                </div> 
+                 </div>
+                <div class="mb-3">
+                        <label for="location" class="form-label">Edit location: </label><br>
+                        <input type="text" placeholder="Durgapur,West Bengal" name="location" id="location" value="<%= item.location%>" class="form-control"  required>
+                        <div class="valid-feedback">Location looks good</div>
+                        <div class="invalid-feedback">Location should be valid</div>
+                </div>
+                <button class="btn btn-dark edit-btn">save changes</button>
+                        <br><br>
+                </form>
+            </div>
+        </div>
+        
+</body>
