@@ -1,0 +1,24 @@
+<% if(newlisting && newlisting.length){ %>
+  <div 
+  class="alert alert-success alert-dismissible fade show col-6 offset-3 mt-2 " 
+  role="alert">
+  <%= newlisting %>
+  <button 
+  type="button" 
+  class="btn-close" 
+  data-bs-dismiss="alert"
+   aria-label="Close"></button>
+</div>
+<% } %>
+<% if(nolisting && nolisting.length){ %>
+  <div 
+  class="alert alert-danger alert-dismissible fade show col-6 offset-3 mt-2 " 
+  role="alert">
+  <%= nolisting %>
+  <button 
+  type="button" 
+  class="btn-close" 
+  data-bs-dismiss="alert"
+   aria-label="Close"></button>
+</div>
+<% } %>

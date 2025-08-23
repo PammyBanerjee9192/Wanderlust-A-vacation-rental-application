@@ -49,6 +49,10 @@ body{
     border:none;
     margin-bottom:2rem;
 }
+.review-card{
+    border:1px solid black; 
+    padding:1rem;
+}
 .card-img-top{
     border-radius:1rem;
     width:100%;
