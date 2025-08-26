@@ -110,3 +110,10 @@ padding:0 2.6rem;
     background-color:rgb(61, 5, 5);
     /* padding:0 2.6rem; */
 }
+
+/*Map styling*/
+
+#map { 
+    height:400px;
+    width:80vh;
+}

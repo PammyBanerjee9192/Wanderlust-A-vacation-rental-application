@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV!="production"){
+require("dotenv").config();
+}
+const atlasturl=process.env.ATLAS_DB_LINK;
 const express=require('express');
 const app=express();
 const ExpressError=require('./utils/customError.js');
@@ -7,11 +11,23 @@ const userRouter=require('./router/user.js');
 const User=require('./models/user.js');
 let port=8080;
 const session=require("express-session");
+const MongoStore = require('connect-mongo');
 const flash=require("connect-flash");
 const passport=require("passport");
 const LocalStrategy=require("passport-local");
+const store=MongoStore.create({
+    mongoUrl:atlasturl,
+    crypto:{
+        secret:process.env.SECRET
+    },
+    touchAfter:24*3600
+});
+store.on("error",()=>{
+    console.log("ERROR IN OUR MONGOSTORE",err);
+})
 const sessionOptions={
-    secret:"mysupersecretkey",
+    store,
+    secret:process.env.SECRET,
     resave:false,
     saveUninitialized:true,
     cookie:{
@@ -43,7 +59,7 @@ const ejsmate=require('ejs-mate');
 app.engine('ejs',ejsmate);
 const mongoose=require('mongoose');
 async function main(){
-    await mongoose.connect('mongodb://127.0.0.1:27017/wonderlust');
+    await mongoose.connect(atlasturl);
 }
 main()
 .then(()=>{
@@ -51,10 +67,6 @@ main()
 })
 .catch((err)=>{
     console.log(err);
-});
-//home route
-app.get('/',(req,res)=>{
-    res.send('server is all set');
 });
 app.use((req,res,next)=>{
     res.locals.newlisting=req.flash("success");

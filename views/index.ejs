@@ -1,17 +1,127 @@
 <% layout('/layouts/boilerplate.ejs') %>
+<style>
+  #filters{
+    display:flex;
+    align-items:center;
+    /* flex-wrap:wrap; */
+  }
+  .icon{
+    text-align:center;
+    margin-top:1rem;
+  }
+  .text{
+    font-size:0.8rem;
+  }
+  .filter{
+    margin-right:2rem;
+    margin-bottom:1rem;
+    opacity:0.8;
+    font-size:1rem;
+  }
+  .filter:hover{
+    opacity:1;
+    cursor:pointer;
+  }
+  .tax-switch{
+    border:1px solid black;
+    border-radius:100px;
+    padding:1rem 1.5rem;
+    height:7vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-left:5rem;
+    margin-bottom:1rem;
+  }
+  .gst{
+    display:none;
+  }
+  /*media queries*/
+  @media(max-width:1286px){
+    .tax-switch{
+      font-size:0.9rem;
+       padding:0.8rem 1rem;
+    }
+  }
+   @media(max-width:1200px){
+    .tax-switch{
+      margin-left:0rem;
+      /* font-size:0.6rem; */
+    }
+    .text{
+      font-size:0.6rem;
+    }
+  }
+  @media(max-width:992px){
+    .tax-switch{
+      display:none
+      /* font-size:0.6rem; */
+    }
+    .filter{
+      display:none;
+    }
+    .alldata{
+      margin-top:2rem;
+    }
+  }
+</style>
 <body>
-    <h1>All data</h1>
+  <div id="filters">
+    <div class="filter">
+      <div class="icon"><i class="fa-solid fa-fire"></i></div>
+      <p class="text">Trending</p>
+    </div>
+    <div class="filter">
+      <div class="icon"><i class="fa-solid fa-bed"></i></div>
+      <p class="text">Rooms</p>
+    </div>
+    <div class="filter">
+      <div class="icon"><i class="fa-solid fa-mountain"></i></div>
+      <p class="text">Amazing views</p>
+    </div>
+    <div class="filter">
+      <div class="icon"><i class="fa-solid fa-mountain-city"></i></div>
+      <p class="text">Iconinc cities</p>
+    </div>
+    <div class="filter">
+      <div class="icon"><i class="fa-solid fa-water"></i></div>
+      <p class="text">Surfing</p>
+    </div>
+    <div class="filter">
+      <div class="icon"><i class="fa-solid fa-water-ladder"></i></div>
+      <p class="text">Amazing pools</p>
+    </div>
+    <div class="filter">
+      <div class="icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+      <p class="text">Beach</p>
+    </div>
+    <div class="filter">
+      <div class="icon"><i class="fa-solid fa-house"></i></div>
+      <p class="text">Cabins</p>
+    </div>
+    <div class="filter">
+      <div class="icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+      <p class="text">OMG!</p>
+    </div>
+    <div class="tax-switch">
+      <div class="form-check-reverse form-switch">
+      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+      <label class="form-check-label" for="flexSwitchCheckDefault">Display total after tax</label>
+    </div>
+  </div>
+  </div>
     <!-- <a href="/listings/new"><button>Create New Listing</button></a>
       -->
-  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 alldata">
    <% for(let item of data){%>
     <a href="/listings/<%= item._id %>" style="text-decoration:none">
     <div class="card">
-   <img src="<%= item.image %>" class="card-img-top" alt="listing-images">
+   <img src="<%= item.image.url %>" class="card-img-top" alt="listing-images">
   <div class="card-body">
     <p class="card-text">
       <%= item.title %><br>
       &#8377; <%= (item.price || 0).toLocaleString("en-IN")%> /night
+      <i class="gst"> &nbsp; <b>+18% GST</b></i>
     </p>
   </div>
   <div class="card-img-overlay"></div>
@@ -20,3 +130,13 @@
    <% } %>
 </div>
 </body>
+<script>
+  let taxbutton=document.querySelector("#flexSwitchCheckDefault");
+  let gsts=document.querySelectorAll(".gst");
+  taxbutton.addEventListener("click",()=>{
+    for(each of gsts){
+      if(each.style.display!="inline"){each.style.display="inline";}
+      else each.style.display="none";
+    }
+  });
+</script>
